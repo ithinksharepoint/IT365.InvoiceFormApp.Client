@@ -1,0 +1,34 @@
+
+
+<div class="container">
+    <div class="row">
+        <div ng-show="showInvoiceList" class="col-md-10 col-sd-3">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <th>Date</th>
+                        <th>Invoice Reference</th>
+                        <th>Company Name</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </thead>
+                    <tbody>
+                        <tr class="clickable-row" ng-repeat="invoice in invoices">
+                            <td>{{invoice.invoiceDate}}</td>
+                            <td>{{invoice.reference}}</td>
+                            <td>{{invoice.companyName}}</td>
+                            <td>{{invoice.currencyType}}{{invoice.invoiceTotal}}</td>
+                            <td>{{invoice.status}}</td>
+                        </tr>
+                    </tbody>
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    <div ng-show="error !== ''" class="col-sd-3">
+        Current Error: {{error}}
+    </div>
+    </div>
+</div>

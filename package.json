@@ -1,0 +1,12 @@
+{
+  "name": "itsp.invoiceformapp",
+  "version": "1.0.0",
+  "description": "used to manage invoices",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"start http://127.0.0.1:8080/app/index.html && http-server -a 127.0.0.1 -p 8080"
+  },
+  "author": "Simon Doy",
+  "license": "ISC"
+}
