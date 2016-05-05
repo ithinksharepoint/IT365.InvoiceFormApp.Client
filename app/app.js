@@ -2,10 +2,10 @@
 
 var invoiceFormApp = angular.module('itspInvoiceFormApp',
 [
-   'ngRoute'
+   'ngRoute', 'invoiceControllersModule'
 ]);
 
-var configurationProvider = function($routeProvider) {
+var appStart = function($routeProvider) {
        
     $routeProvider.when('/invoices', {
         templateUrl:'/app/views/list-invoices.html',
@@ -18,4 +18,4 @@ var configurationProvider = function($routeProvider) {
 };
 
     
-invoiceFormApp.config(['$routeProvider'], routeProvider);
+invoiceFormApp.config(['$routeProvider', appStart]);

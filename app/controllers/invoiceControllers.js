@@ -2,11 +2,46 @@
 
 var invoiceControllersModule = angular.module('invoiceControllersModule', []);
 
-invoiceControllersModule.factory('listInvoicesController', ['$scope', function ($scope) {
+invoiceControllersModule.controller('listInvoicesController', ['$scope', function ($scope) {
   $scope.invoices = [];
   $scope.error="";
   
-  $scope.showInvoiceList=true;
+  $scope.showInvoiceList=function(){
+    return true;
+    };
+    
+    function createInvoice(){
+    var invoiceObject={
+        reference: '',
+        companyName: '',
+        invoiceDate: '',
+        contact:'',
+        addressLine1:'',
+        addressLine2:'',
+        addressLine3:'',
+        addressLine4:'',
+        addressCity:'',
+        addressCounty:'',
+        addressPostCode:'',
+        addressCountry:'',
+        agencyName:'',
+        agencyContact: '',
+        invoiceLines: [
+            
+        ],
+        invoiceTotal:0,
+        currencyType:'£',
+        vatRate:0,
+        vatAmount:0,
+        invoiceTotalWithVat:0,
+        status:'',
+        createdBy:'',
+        modifiedBy:'',
+        created:'',
+        modified:'',
+    };
+    return invoiceObject;       
+    };
  
   $scope.load = function(){
       var invoice=createInvoice();
@@ -17,7 +52,7 @@ invoiceControllersModule.factory('listInvoicesController', ['$scope', function (
       invoice.invoiceTotal=10000;
       
       
-      $scope.invoices.add(invoice);
+      $scope.invoices.push(invoice);
       
       invoice=createInvoice();
       invoice.reference="INV02";
@@ -26,39 +61,10 @@ invoiceControllersModule.factory('listInvoicesController', ['$scope', function (
       invoice.vatRate=20;
       invoice.invoiceTotal=10000;
    
-      $scope.invoices.add(invoice);   
+      $scope.invoices.push(invoice);   
   };
   
-  function createInvoice(){
-      var invoiceObject={
-          reference: '',
-          companyName: '',
-          invoiceDate: '',
-          contact:'',
-          addressLine1:'',
-          addressLine2:'',
-          addressLine3:'',
-          addressLine4:'',
-          addressCity:'',
-          addressCounty:'',
-          addressPostCode:'',
-          addressCountry:'',
-          agencyName:'',
-          agencyContact: '',
-          invoiceLines: [
-              
-          ],
-          invoiceTotal:0,
-          currencyType:'£',
-          vatRate:0,
-          vatAmount:0,
-          invoiceTotalWithVat:0,
-          status:'',
-          createdBy:'',
-          modifiedBy:'',
-          created:'',
-          modified:'',
-      };
-      return invoiceObject;       
-  };
+  $scope.load();
+  
+  
 }]);
