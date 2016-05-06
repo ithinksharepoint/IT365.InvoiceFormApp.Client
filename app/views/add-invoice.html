@@ -1,0 +1,129 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-sd-12">
+            <button ng-show="mode=='view'" class="btn btn-default" type="button" title="Edit" ng-click="editInvoice()"><i class="fa fa-2x fa-pencil" aria-hidden="true"></i><span class="sr-only">Edit</span></button>
+            &nbsp;
+            <button ng-hide="mode=='view'" class="btn btn-default" type="button" title="Save" ng-click="saveInvoice()"><i class="fa fa-2x fa-save" aria-hidden="true"></i><span class="sr-only">Save</span></button>
+            &nbsp;
+            <button class="btn" type="button" title="Cancel" ng-click="cancel()"><i class="fa fa-2x fa-times-circle" aria-hidden="true"></i><span class="sr-only">Cancel</span></button>
+            &nbsp;
+            <button class="btn" type="button" title="Create Pdf" ng-click="createPdf('#invoiceDiv');"><i class="fa fa-2x fa-photo" aria-hidden="true"></i><span class="sr-only">Create Pdf</span></button>
+        </div>
+        
+        <div class="col-md-8 col-sd-12">
+            <span ng-show="status !== ''">{{status}}</span>
+            <span ng-show="error !== ''">{{error}}</span>
+        </div>
+        
+    </div>
+    <form>
+    <div id="invoiceDiv" class="row">
+        <h2>Invoice: {{invoice.reference}} ({{mode}})</h2>
+        <div class="col-md-4 col-sd-12">
+            <div class="form-group">
+                <input type="hidden" ng-model="invoice.id"" id="invoiceid" />
+                <label for="invoiceReference">Invoice Reference</label>
+                <input type="text"  ng-model="invoice.reference" required class="form-control" id="invoiceReference" placeholder="Please enter Invoice Reference">
+            </div>
+            <div class="form-group">
+                <label for="invoiceDate">Date</label>
+                <input type="date" ng-model="invoice.invoiceDate" required class="form-control" id="invoiceDate" placeholder="Please enter Invoice Date">
+            </div>
+            <div class="form-group">
+                <label for="vatRate">Vat Rate</label>
+                <input type="number" ng-disabled="true" ng-model="config.vatRate" class="form-control" id="vatRate">
+            </div>
+            <div class="form-group">
+                <label for="clientName">Agency</label>
+                <input type="text" ng-model="invoice.agencyName" class="form-control" id="companyName" placeholder="Please provide the name of the agency.">
+                <label for="clientName">Agency Contact</label>
+                <input type="text" ng-model="invoice.agencyContact" class="form-control" id="companyName" placeholder="Please provide the name of the agency contact.">
+            </div>
+        </div>
+        <div class="col-md-4 col-sd-12">
+            <div class="form-group">
+                <label for="clientName">Client</label>
+                <input type="text" required ng-model="invoice.companyName" class="form-control" id="companyName" placeholder="Please provide the name of the client.">
+            </div>
+            <div class="form-group">
+                <label for="clientContact">Contact Name</label>
+                <input type="text" required ng-model="invoice.contact" class="form-control" id="clientContact" placeholder="Please provide the name of the contact at the clients.">
+            </div>
+            <div class="form-group">
+                <label for="addressLine1">Address</label>
+                <input type="text" ng-model="invoice.addressLine1" class="form-control" id="addressLine1">
+                <input type="text" ng-model="invoice.addressLine2" class="form-control" id="addressLine2">
+                <input type="text" ng-model="invoice.addressLine3" class="form-control" id="addressLine3">
+                <input type="text" ng-model="invoice.addressLine4" class="form-control" id="addressLine4">
+            
+                <label for="addressCity">City</label>
+                <input type="text" ng-model="invoice.addressCity" class="form-control" id="addressCity" required />
+                <label for="addressPostCode">Postcode</label>
+                <input type="text" ng-model="invoice.addressPostCode" class="form-control" id="addressPostCode">
+                <label for="addressCountry">Country</label>
+                <input type="text" ng-model="invoice.addressCountry" class="form-control" id="addressCountry">
+            </div>
+        </div>
+    </div>
+    <div class="well">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    Description
+                </th>
+                <th>    
+                    Unit Type
+                </th>
+                <th>    
+                    Quantity
+                </th>
+                <th>    
+                    Amount
+                </th>
+                <th>    
+                    Line Total
+                </th>
+                    
+            </tr>
+            <tbody>
+            <tr ng-repeat="invoiceLine in invoice.invoiceLines">
+                <td>
+                    <input class="form-control" type="text" ng-model="invoiceLine.description" placeholder="Provide description">
+                </td>
+                <td>    
+                    <select class="form-control"ng-model="invoiceLine.unitType" id="invoiceUnit">
+                        <option ng-repeat="unitOption in config.unitTypes" value="{{unitOption.name}}">{{unitOption.name}}</option>
+                    </select>
+                </td>
+                <td>    
+                    <input class="form-control"  type="number" ng-model="invoiceLine.unitQuantity">
+                </td>
+                <td>    
+                    <input class="form-control"  type="number" ng-model="invoiceLine.unitValue" ng-change="invoiceLine.updateLineTotal()">
+                </td>
+                <td>    
+                    <p class="form-control-static">{{invoiceLine.lineTotal}</p>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot align="right">
+                <tr>
+                    <td>
+                        <span class="form-control-static">Total: {{invoice.invoiceTotal}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="form-control-static">VAT: {{invoice.vatAmount}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="form-control-static">Total including VAT: {{invoice.invoiceTotalWithVat}}</p>        
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</form>
+</div>
