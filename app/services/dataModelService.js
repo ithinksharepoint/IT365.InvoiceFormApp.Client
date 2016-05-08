@@ -1,6 +1,12 @@
 var dataModelService = angular.module('dataModelService', []);
 
-dataModelService.factory('dataModelService', [dataModelServiceFactory]);
+dataModelService.service('dataModelService', [dataModelServiceFactory]);
+dataModelService.provider('dataModelService', function dataModelServiceProvider(){
+    this.$get = [function initDataModelService(){
+        var service=new dataModelServiceFactory();
+        return service;
+    }];
+});
 
 function dataModelServiceFactory()
 {

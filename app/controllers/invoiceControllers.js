@@ -85,16 +85,9 @@ invoiceControllersModule.controller('addInvoiceController', ['$scope', 'dataMode
     $scope.error="";
     
     $scope.saveInvoice = function saveInvoiceStub(){
-        
-        invoiceDataService.saveNewInvoice($scope.invoiceNo, $scope.invoice).then(function processSuccess(response){
-            $scope.status="Successfully Saved Invoice";
-            $location.path("#");
-            return true;
-        },
-        function processFailure(response){
-            //alert(response.data);
-            $scope.error="Failed to create invoice: " + response.data.message;
-        });
+        $scope.status="Successfully Saved Invoice";
+        $location.path("#");
+        return true;
     };
     
 }]);

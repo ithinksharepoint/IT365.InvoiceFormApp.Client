@@ -7,6 +7,16 @@
         <link rel="stylesheet" type="text/css" href="/app/css/invoiceformapp.css" />
     </head>
     <body>
+        <div>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <ul class="nav navbar-nav">
+                        <li><a class="btn primary" href="#">Home</a></li>
+                        <li><a class="btn primary" href="#/invoices/add" title="Create Invoice">New Invoice</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
         <div ng-view></div>
     </body>
     <script src="/bower_components/angular/angular.js"></script>
@@ -17,6 +27,7 @@
    
     
     <script src="/app/controllers/invoiceControllers.js"></script>
+    <script src="/app/services/dataModelService.js"></script>
     
     <script src="/app/app.js"></script>
    

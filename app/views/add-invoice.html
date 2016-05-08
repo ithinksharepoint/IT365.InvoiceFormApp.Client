@@ -1,14 +1,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-sd-12">
-            <button ng-show="mode=='view'" class="btn btn-default" type="button" title="Edit" ng-click="editInvoice()"><i class="fa fa-2x fa-pencil" aria-hidden="true"></i><span class="sr-only">Edit</span></button>
+            <button class="btn btn-default" type="button" title="Save" ng-click="saveInvoice()">Save</button>
             &nbsp;
-            <button ng-hide="mode=='view'" class="btn btn-default" type="button" title="Save" ng-click="saveInvoice()"><i class="fa fa-2x fa-save" aria-hidden="true"></i><span class="sr-only">Save</span></button>
-            &nbsp;
-            <button class="btn" type="button" title="Cancel" ng-click="cancel()"><i class="fa fa-2x fa-times-circle" aria-hidden="true"></i><span class="sr-only">Cancel</span></button>
-            &nbsp;
-            <button class="btn" type="button" title="Create Pdf" ng-click="createPdf('#invoiceDiv');"><i class="fa fa-2x fa-photo" aria-hidden="true"></i><span class="sr-only">Create Pdf</span></button>
-        </div>
+            <button class="btn" type="button" title="Cancel" ng-click="cancel()">Cancel</button>
+          </div>
         
         <div class="col-md-8 col-sd-12">
             <span ng-show="status !== ''">{{status}}</span>
@@ -18,16 +14,16 @@
     </div>
     <form>
     <div id="invoiceDiv" class="row">
-        <h2>Invoice: {{invoice.reference}} ({{mode}})</h2>
+        <h2>Invoice: {{invoice.reference}}</h2>
         <div class="col-md-4 col-sd-12">
             <div class="form-group">
                 <input type="hidden" ng-model="invoice.id"" id="invoiceid" />
                 <label for="invoiceReference">Invoice Reference</label>
-                <input type="text"  ng-model="invoice.reference" required class="form-control" id="invoiceReference" placeholder="Please enter Invoice Reference">
+                <input type="text"  ng-model="invoice.reference"  class="form-control" id="invoiceReference" placeholder="Please enter Invoice Reference">
             </div>
             <div class="form-group">
                 <label for="invoiceDate">Date</label>
-                <input type="date" ng-model="invoice.invoiceDate" required class="form-control" id="invoiceDate" placeholder="Please enter Invoice Date">
+                <input type="date" ng-model="invoice.invoiceDate"  class="form-control" id="invoiceDate" placeholder="Please enter Invoice Date">
             </div>
             <div class="form-group">
                 <label for="vatRate">Vat Rate</label>
@@ -43,11 +39,11 @@
         <div class="col-md-4 col-sd-12">
             <div class="form-group">
                 <label for="clientName">Client</label>
-                <input type="text" required ng-model="invoice.companyName" class="form-control" id="companyName" placeholder="Please provide the name of the client.">
+                <input type="text" ng-model="invoice.companyName" class="form-control" id="companyName" placeholder="Please provide the name of the client.">
             </div>
             <div class="form-group">
                 <label for="clientContact">Contact Name</label>
-                <input type="text" required ng-model="invoice.contact" class="form-control" id="clientContact" placeholder="Please provide the name of the contact at the clients.">
+                <input type="text" ng-model="invoice.contact" class="form-control" id="clientContact" placeholder="Please provide the name of the contact at the clients.">
             </div>
             <div class="form-group">
                 <label for="addressLine1">Address</label>
@@ -57,7 +53,7 @@
                 <input type="text" ng-model="invoice.addressLine4" class="form-control" id="addressLine4">
             
                 <label for="addressCity">City</label>
-                <input type="text" ng-model="invoice.addressCity" class="form-control" id="addressCity" required />
+                <input type="text" ng-model="invoice.addressCity" class="form-control" id="addressCity" />
                 <label for="addressPostCode">Postcode</label>
                 <input type="text" ng-model="invoice.addressPostCode" class="form-control" id="addressPostCode">
                 <label for="addressCountry">Country</label>
@@ -66,6 +62,7 @@
         </div>
     </div>
     <div class="well">
+        <button ng-click="addInvoiceLine()" title="Add new line">Add line to Invoice</button>
         <table class="table table-striped">
             <tr>
                 <th>
