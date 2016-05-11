@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row">
-        <div ng-show="showInvoiceList" class="col-md-10 col-sd-3">
+        <div ng-show="loggedIn && showInvoiceList" class="col-md-10 col-sd-3">
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -24,6 +24,9 @@
                     
                 </table>
             </div>
+        </div>
+        <div ng-hide="loggedIn">
+            <button class="btn btn-primary" title="Login" ng-click="login()">Login</a>
         </div>
     </div>
     <div class="row">

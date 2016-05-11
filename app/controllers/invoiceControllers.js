@@ -2,7 +2,7 @@
 
 var invoiceControllersModule = angular.module('invoiceControllersModule', []);
 
-invoiceControllersModule.controller('listInvoicesController', ['$scope', function ($scope) {
+invoiceControllersModule.controller('listInvoicesController', ['$scope', '$location', 'adalAuthenticationService', function ($scope, $location, adalService) {
   $scope.invoices = [];
   $scope.error="";
   
@@ -32,7 +32,19 @@ invoiceControllersModule.controller('listInvoicesController', ['$scope', functio
       $scope.invoices.push(invoice);   
   };
   
-  $scope.load();
+  $scope.loggedIn=adalService.userInfo.isAuthenticated;
+  $scope.login = function loginStub(){
+      adalService.login().then(function(){
+            $location('#')
+        });  
+  }
+  if(adalService.userInfo.isAuthenticated)
+  {
+       
+        $scope.load();
+
+  }
+  
   
   function createInvoice(){
         var invoiceObject={
