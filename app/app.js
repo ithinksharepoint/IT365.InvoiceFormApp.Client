@@ -2,10 +2,10 @@
 
 var invoiceFormApp = angular.module('itspInvoiceFormApp',
 [
-   'ngRoute', 'invoiceControllersModule', 'dataModelService', 'AdalAngular', 'configurationServiceModule'
+   'ngRoute', 'invoiceControllersModule', 'dataModelService', 'AdalAngular', 'applicationConstantsModule', 'configurationServiceModule', 'settingsController'
 ]);
 
-var appStart = function($routeProvider, $httpProvider, adalProvider, applicationConstants) {
+var appStart = function($routeProvider, $httpProvider, adalProvider, applicationConstants, configurationServiceProvider) {
        
     $routeProvider.when('/invoices/add', {
         templateUrl:'/app/views/add-invoice.html',
@@ -15,6 +15,10 @@ var appStart = function($routeProvider, $httpProvider, adalProvider, application
         templateUrl:'/app/views/list-invoices.html',
         controller: 'listInvoicesController',
         requireADLogin: false
+       }).when('/settings', {
+        templateUrl:'/app/views/settings.html',
+        controller: 'settingsController',
+        requireADLogin: true
        }).otherwise({
         redirectTo: '/invoices'
     });
@@ -23,14 +27,15 @@ var appStart = function($routeProvider, $httpProvider, adalProvider, application
     var clientId=applicationConstants.clientId;
     var tenantName=applicationConstants.tenantName;
     var endPoints=applicationConstants.endPoints;
+    var apiUrl = applicationConstants.apiUrl;
     
-    
+    configurationServiceProvider.init(apiUrl, tenantName, clientId, endPoints);
     
     adalProvider.init({
         instance: instance, 
         tenant: tenantName,
         clientId: clientId,
-        endPoints: endPoints,
+        endpoints: endPoints,
         anonymousEndpoints:{},
         extraQueryParameter: 'nux=1',
         cacheLocation: 'localStorage', // enable this for IE, as sessionStorage does not work for localhost.
@@ -40,4 +45,4 @@ var appStart = function($routeProvider, $httpProvider, adalProvider, application
 };
 
     
-invoiceFormApp.config(['$routeProvider', '$httpProvider', 'adalAuthenticationServiceProvider', 'applicationConstants', appStart]);
+invoiceFormApp.config(['$routeProvider', '$httpProvider', 'adalAuthenticationServiceProvider', 'applicationConstants', 'configurationServiceProvider', appStart]);

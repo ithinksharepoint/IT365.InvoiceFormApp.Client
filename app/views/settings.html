@@ -1,0 +1,38 @@
+<section>
+<h1> Settings </h1>
+<h2> Login Information </h2>
+
+<p class="form-control">
+    Username: {{userInfo.userName}}
+</p>
+<p class="form-control">
+    Profile: <br/>
+    <ul>
+        <li ng-repeat="profileItem in userInfo.profile">{{profileItem}}</li>
+    </ul>
+</p>
+
+</section>
+<section>
+    <h2>Api Settings</h2>
+    <p>
+    {{apiConfig}}
+    </p>
+</section>
+
+<section>
+    <h2>Application Information</h2>
+    <p>
+    {{applicationInformation}}
+    </p>
+</section>
+
+<section>
+    <h2>Additional Settings</h2>
+</section>
+
+
+<section>
+    <h2>Installation Information</h2>
+    <a class="btn" href="#/installation" title="Show Installation Information">Installation Status</a>
+</section>
