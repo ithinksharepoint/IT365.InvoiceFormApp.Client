@@ -13,7 +13,7 @@
                         <th>Status</th>
                     </thead>
                     <tbody>
-                        <tr class="clickable-row" ng-repeat="invoice in invoices">
+                        <tr class="clickable-row" ng-repeat="invoice in invoices" ng-click="showInvoice(invoice.reference)">
                             <td>{{invoice.invoiceDate}}</td>
                             <td>{{invoice.reference}}</td>
                             <td>{{invoice.companyName}}</td>

@@ -2,7 +2,7 @@
 
 var invoiceFormApp = angular.module('itspInvoiceFormApp',
 [
-   'ngRoute', 'invoiceControllersModule', 'dataModelService', 'AdalAngular', 'applicationConstantsModule', 'configurationServiceModule', 'settingsController'
+   'ngRoute', 'invoiceControllersModule', 'dataModelService', 'AdalAngular', 'applicationConstantsModule', 'configurationServiceModule', 'settingsController', 'invoiceDataService'
 ]);
 
 var appStart = function($routeProvider, $httpProvider, adalProvider, applicationConstants, configurationServiceProvider) {
@@ -11,7 +11,15 @@ var appStart = function($routeProvider, $httpProvider, adalProvider, application
         templateUrl:'/app/views/add-invoice.html',
         controller: 'addInvoiceController',
         requireADLogin: true
-       }).when('/invoices', {
+       }).when('/invoices/:invoiceid/view', { 
+        templateUrl: '/app/views/invoice-display.html',
+        controller: 'viewInvoiceController',
+        requireADLogin: true        
+        }).when('/invoices/:invoiceid/edit', {
+        templateUrl:'/app/views/edit-invoice.html',
+        controller: 'editInvoiceController',
+        requireADLogin: true        
+        }).when('/invoices', {
         templateUrl:'/app/views/list-invoices.html',
         controller: 'listInvoicesController',
         requireADLogin: false
